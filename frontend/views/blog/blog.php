@@ -155,10 +155,11 @@ AppAsset::register($this);
             <div class="card">
                 <div class="card-body">
                     <p class="fw-bold fs-6">جستجو در وبلاگ</p>
-                    <form action="search.html">
+                    <form action="/blog/search" method="get">
                         <div class="input-group mb-3">
                             <input
                                 type="text"
+                                name="kw"   
                                 class="form-control"
                                 placeholder="جستجو ..."
                             />

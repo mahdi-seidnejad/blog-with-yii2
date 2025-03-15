@@ -39,11 +39,7 @@ AppAsset::register($this);
                     </a>
 
                     <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
-                    <a
-                            class="me-3 py-2 link-body-emphasis text-decoration-none"
-                            href="#"
-                            >پروفایل</a
-                        >
+
 
                         <a
                             class="me-3 py-2 link-body-emphasis text-decoration-none"
