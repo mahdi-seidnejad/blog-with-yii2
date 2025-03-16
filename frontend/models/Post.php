@@ -13,15 +13,16 @@ class Post extends ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'body'], 'required'], 
+            [['title', 'body', 'category_id'], 'required'],
             [['body'], 'string'],
-            [['title'], 'string', 'max' => 200],
-            [['image'], 'string', 'max' => 100],
-            [['writer'],'string', 'max' => 200],
+            [['title', 'writer'], 'string', 'max' => 200],
+            [['image'], 'string', 'max' => 255], 
             [['category_id'], 'integer'],
-            [['created_at']]
+            [['created_at'], 'safe'],
+
         ];
     }
+    
     public function getCategory()
 {
     return $this->hasOne(Category::class, ['id' => 'category_id']);

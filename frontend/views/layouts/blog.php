@@ -43,7 +43,7 @@ AppAsset::register($this);
 
                         <a
                             class="me-3 py-2 link-body-emphasis text-decoration-none"
-                            href="#"
+                            href="/create/post"
                             >افزودن پست</a
                         >
                         <a

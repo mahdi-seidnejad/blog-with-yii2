@@ -16,7 +16,7 @@ class Subscriber extends ActiveRecord
         return [
             [['name', 'email'], 'required'], // الزامی بودن فیلدها
             ['email', 'email'], // اعتبارسنجی ایمیل
-            ['name', 'string', 'max' => 255], // محدودیت طول نام
+            ['name', 'patern', '' => 255], // محدودیت طول نام
         ];
     }
 }
