@@ -20,9 +20,7 @@ class CreateController extends Controller
     public function actionSubmit()
 {
     $post = new Post();
-    $post->load(Yii::$app->request->post(), '');
-
-
+    $post->attributes = Yii::$app->request->post('post');
     $imageFile = UploadedFile::getInstanceByName('image');
 
     if ($imageFile) {
@@ -33,11 +31,6 @@ class CreateController extends Controller
             $post->image = $fileName; 
         }
     }
-    
-    $post->title = Yii::$app->request->post('title');
-    $post->writer = Yii::$app->request->post('writer');
-    $post->category_id = Yii::$app->request->post('category_id');
-    $post->body = Yii::$app->request->post('body');
 
     if ($post->save()) {
         Yii::$app->session->setFlash('success', 'اطلاعات با موفقیت ذخیره شد.');

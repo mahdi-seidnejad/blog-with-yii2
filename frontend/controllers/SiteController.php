@@ -267,13 +267,10 @@ class SiteController extends Controller
     public function actionSubmit()
     {
 
-            $name = Yii::$app->request->post('name');
-            $email = Yii::$app->request->post('email');
+
 
             $user = new Subscriber();
-            $user->name = $name;
-            $user->email = $email;
-
+            $user->attributes = \Yii::$app->request->post('subscribe');
             if ($user->save()) {
                 Yii::$app->session->setFlash('success', 'اطلاعات با موفقیت ذخیره شد.');
             } else {

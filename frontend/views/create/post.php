@@ -12,7 +12,7 @@ AppAsset::register($this);
 
                     <!-- Posts -->
                     <div class="mt-4">
-                    <form class="row g-4" method="post" enctype="multipart/form-data" action="<?= Yii::$app->urlManager->createUrl(['create/submit']) ?>">
+                    <form class="row g-4" name='post' method="post" enctype="multipart/form-data" action="<?= Yii::$app->urlManager->createUrl(['create/submit']) ?>">
                     <?= \yii\helpers\Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->csrfToken) ?>                            <div class="col-12 col-sm-6 col-md-4">
                                 <label class="form-label">عنوان مقاله</label>
                                 <input type="text"  name="title" class="form-control" />

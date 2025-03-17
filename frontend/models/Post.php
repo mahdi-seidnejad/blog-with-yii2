@@ -18,7 +18,7 @@ class Post extends ActiveRecord
             [['title', 'writer'], 'string', 'max' => 200],
             [['image'], 'string', 'max' => 255], 
             [['category_id'], 'integer'],
-            [['created_at'], 'safe'],
+            [['created_at', 'id'], 'safe'],
 
         ];
     }

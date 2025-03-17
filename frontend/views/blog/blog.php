@@ -1,6 +1,7 @@
 <?php
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 AppAsset::register($this);
 ?>
 
@@ -193,21 +194,21 @@ AppAsset::register($this);
             <div class="card mt-4">
                 <div class="card-body">
                     <p class="fw-bold fs-6">عضویت در خبرنامه</p>
+                    <?php
+                    $form = ActiveForm::begin([
+                        'id' => 'subscribe',
+                        'options' => ['class' => 'form-horizontal'],
+                    ]) ?>
+                        <?= $form->field($model, 'name')->label('نام') ?>
+                        <?= $form->field($model, 'email')->label('ایمیل')?>
 
-                    <form method="post" action="<?= Yii::$app->urlManager->createUrl(['site/submit']) ?>">
-                        <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->getCsrfToken(); ?>">
-                        <div class="mb-3">
-                            <label class="form-label">نام</label>
-                            <input type="text" name="name" class="form-control" />
+                        <div class="form-group">
+                            <div class="d-grid gap-2">
+                                <?= Html::submitButton('ارسال', ['class' => 'btn btn-secondary mb-3 mt-3']) ?>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">ایمیل</label>
-                            <input type="email" name="email" class="form-control" />
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-secondary">ارسال</button>
-                        </div>
-                    </form>
+                    <?php ActiveForm::end() ?>
+
                 </div>
             </div>
 

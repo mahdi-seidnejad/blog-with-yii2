@@ -8,15 +8,15 @@ class Subscriber extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'subscriber'; // نام جدول در دیتابیس
+        return 'subscriber'; 
     }
 
     public function rules()
     {
         return [
-            [['name', 'email'], 'required'], // الزامی بودن فیلدها
-            ['email', 'email'], // اعتبارسنجی ایمیل
-            ['name', 'patern', '' => 255], // محدودیت طول نام
+            [['name', 'email'], 'required'], 
+            ['email', 'email'], 
+            [['name'], 'string', 'max' => 255],
         ];
     }
 }
