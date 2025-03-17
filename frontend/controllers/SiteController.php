@@ -277,13 +277,13 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash('error', 'خطا در ذخیره اطلاعات.');
             
             }
-            return $this->redirect(['site/form']);
+            return $this->redirect(['site/success']);
         
     }
 
-    public function actionForm()
+    public function actionSuccess()
     {
-        return $this->render('form');
+        return $this->render('success');
     }
     public function actionComment()
     {
@@ -299,7 +299,7 @@ class SiteController extends Controller
         } else {
             Yii::$app->session->setFlash('error', 'خطا در ثبت نظر.');
         }
-        return $this->redirect(['site/form']);
+        return $this->redirect(['site/success']);
     }
 }
 

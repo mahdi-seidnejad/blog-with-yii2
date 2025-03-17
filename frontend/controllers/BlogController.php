@@ -21,7 +21,7 @@ class BlogController extends Controller
         $subscriber = new Subscriber();
         // $subscriber->attributes = \Yii::$app->request->post('subscribe');
         if ($subscriber->load(Yii::$app->request->post()) && $subscriber->save()) {
-            return "succes  ";
+            return $this->redirect(['site/success']);
         }   
         return $this->render('blog', ['posts' => $posts , 'categorys'=>$categorys, 'model'=>$subscriber]); 
     }
