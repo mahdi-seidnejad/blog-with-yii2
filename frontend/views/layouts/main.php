@@ -26,37 +26,36 @@ AppAsset::register($this);
         <?php $this->head() ?>
     </head>
     <body>
-        <div class="container py-3">
+
             <header
-                class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"
+                class=" pb-3 mb-4 border-bottom"
             >
-                <a
-                    href="/blog/blog"
-                    class="fs-4 fw-medium link-body-emphasis text-decoration-none"
-                >
-                    Heydari.io
-                </a>
-
-                <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
-                <a
-                        class="me-3 py-2 link-body-emphasis text-decoration-none"
-                        href="#"
-                        >پروفایل</a
-                    >
-
+                <div class="container py-3 align-items-center d-flex flex-column flex-md-row ">
                     <a
-                        class="me-3 py-2 link-body-emphasis text-decoration-none"
-                        href="#"
-                        >افزودن پست</a
-                    >
-                    <a
-                        class="fw-bold me-3 py-2 link-body-emphasis text-decoration-none"
                         href="/blog/blog"
-                        >صفحه اصلی</a
+                        class="fs-4 fw-medium link-body-emphasis text-decoration-none"
                     >
-                </nav>
+                        Heydari.io
+                    </a>
+
+                    <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
+
+
+                        <a
+                            class="me-3 py-2 link-body-emphasis text-decoration-none"
+                            href="/create/post"
+                            >افزودن پست</a
+                        >
+                        <a
+                            class="fw-bold me-3 py-2 link-body-emphasis text-decoration-none"
+                            href="/blog/blog"
+                            >صفحه اصلی</a
+                        >
+
+                    </nav>
+                </div>
             </header>
-      </div>
+
 
             <main> 
                 <?= $content ?>
