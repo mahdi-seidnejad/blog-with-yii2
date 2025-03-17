@@ -14,13 +14,17 @@ class CreateController extends Controller
 
     public function actionPost()
     {
-        $categorys = Category::find()->orderBy(['created_at' => SORT_DESC])->all();
-        return $this->render('post',['categorys' => $categorys]);
+        $model = new Post();
+        $categorys = Category::find()->asArray()->orderBy(['created_at' => SORT_DESC])->all();
+        $categorys = array_column($categorys, 'name', 'id');
+        print_r($categorys).'<br>';
+        return $this->render('post',['categorys' => $categorys, 'model' =>$model]);
     }
     public function actionSubmit()
 {
     $post = new Post();
     $post->attributes = Yii::$app->request->post('post');
+    
     $imageFile = UploadedFile::getInstanceByName('image');
 
     if ($imageFile) {

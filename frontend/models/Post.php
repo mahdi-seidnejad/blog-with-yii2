@@ -22,6 +22,15 @@ class Post extends ActiveRecord
 
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'title' => ' عنوان مقاله',
+            'body' => 'متن مقاله',
+            'image' => 'تصویر مقاله',
+            'category_id' => 'دسته بندی مقاله',
+        ];
+    }
     
     public function getCategory()
 {

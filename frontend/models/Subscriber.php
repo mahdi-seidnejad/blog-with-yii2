@@ -19,4 +19,11 @@ class Subscriber extends ActiveRecord
             [['name'], 'string', 'max' => 255],
         ];
     }
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'نام',
+            'email' => 'ایمیل'
+        ];
+    }
 }
