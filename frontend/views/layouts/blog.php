@@ -31,27 +31,14 @@ AppAsset::register($this);
                 class=" pb-3 mb-4 border-bottom"
             >
                 <div class="container py-3 align-items-center d-flex flex-column flex-md-row ">
-                    <a
-                        href="/blog/blog"
-                        class="fs-4 fw-medium link-body-emphasis text-decoration-none"
-                    >
-                        Heydari.io
-                    </a>
 
+                    <?= Html::a('Heydari.io', ['/home'], ['class' => 'fs-4 fw-medium link-body-emphasis text-decoration-none']) ?>
                     <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
 
 
-                        <a
-                            class="me-3 py-2 link-body-emphasis text-decoration-none"
-                            href="/create/post"
-                            >افزودن پست</a
-                        >
-                        <a
-                            class="fw-bold me-3 py-2 link-body-emphasis text-decoration-none"
-                            href="/blog/blog"
-                            >صفحه اصلی</a
-                        >
+                        <?= Html::a('افزودن پست', ['create/post'], ['class' => 'me-3 py-2 link-body-emphasis text-decoration-none']) ?>
 
+                        <?= Html::a('صفحه اصلی', ['/home'], ['class' => 'fw-bold me-3 py-2 link-body-emphasis text-decoration-none']) ?>
                     </nav>
                 </div>
             </header>

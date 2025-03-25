@@ -3,6 +3,7 @@ use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 AppAsset::register($this);
+use yii\helpers\Url;
 ?>
 
 
@@ -132,11 +133,8 @@ AppAsset::register($this);
                             <div
                                 class="d-flex justify-content-between align-items-center"
                             >
-                                <a
-                                    href="single?id=<?= Html::encode($post->id)?>"
-                                    class="btn btn-sm btn-dark"
-                                    >مشاهده</a
-                                >
+
+                                <?= Html::a('مشاهده', Url::to(['single', 'id' => Html::encode($post->id)]), ['class' => 'btn btn-sm btn-dark']) ?>
 
                                 <p class="fs-7 mb-0">
                                     نویسنده : <?= Html::encode($post->writer)?>
