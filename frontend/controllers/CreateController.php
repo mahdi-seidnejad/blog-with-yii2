@@ -35,30 +35,4 @@ class CreateController extends Controller
             }
             return $this->render('post',['categorys' => $categorys, 'model' =>$model]);
         }
-    public function actionSubmit()
-{
-    $post = new Post();
-    $post->attributes = Yii::$app->request->post('post');
-    
-    $imageFile = UploadedFile::getInstanceByName('image');
-
-    if ($imageFile) {
-        $fileName = time() . '.' . $imageFile->extension;
-        $filePath = Yii::getAlias('@frontend/web/images/') . $fileName;
-
-        if ($imageFile->saveAs($filePath)) {
-            $post->image = $fileName; 
-        }
-    }
-
-    if ($post->save()) {
-        Yii::$app->session->setFlash('success', 'اطلاعات با موفقیت ذخیره شد.');
-    } else {
-        Yii::$app->session->setFlash('error', 'خطا در ذخیره اطلاعات.');
-    }
-
-    return $this->redirect(['site/form']);
-}
-
-
  }  

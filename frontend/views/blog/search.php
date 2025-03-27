@@ -43,6 +43,8 @@ use yii\helpers\Html;
                                                         ><?= Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ?>
                                                         </span
                                                     >
+                                                    <?= Html::tag('span',Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ,['class' => 'badge text-bg-secondary'])?>
+
                                                 </div>
                                             </div>
                                             <p
@@ -134,20 +136,7 @@ use yii\helpers\Html;
             </div>
 
             <!-- About Section -->
-            <div class="card mt-4">
-                <div class="card-body">
-                    <p class="fw-bold fs-6">درباره ما</p>
-                    <p class="text-justify">
-                        لورم ایپسوم متن ساختگی با تولید سادگی
-                        نامفهوم از صنعت چاپ و با استفاده از
-                        طراحان گرافیک است. چاپگرها و متون بلکه
-                        روزنامه و مجله در ستون و سطرآنچنان که
-                        لازم است و برای شرایط فعلی تکنولوژی مورد
-                        نیاز و کاربردهای متنوع با هدف بهبود
-                        ابزارهای کاربردی می باشد.
-                    </p>
-                </div>
-            </div>
+
         </div>
                     </div>
                 </section>

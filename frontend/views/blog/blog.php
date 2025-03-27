@@ -118,11 +118,8 @@ use yii\helpers\Url;
                                 <?= Html::encode($post->title)?>
                                 </h5>
                                 <div>
-                                    <span
-                                        class="badge text-bg-secondary"
-                                        ><?= Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ?>
-                                        </span
-                                    >
+
+                                    <?= Html::tag('span',Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ,['class' => 'badge text-bg-secondary'])?>
                                 </div>
                             </div>
                             <p
@@ -179,11 +176,11 @@ use yii\helpers\Url;
                 <ul class="list-group list-group-flush p-0">
                 <?php  foreach ($categorys as $category): ?>
                     <li class="list-group-item">
-                        <?= Html::a(Html::encode($category->name), ['blog/blog', 'id' => $category->id], ['class' => 'link-body-emphasis text-decoration-none']) ?>
+                        <?= Html::a(Html::encode($category->name), ['/home', 'id' => $category->id], ['class' => 'link-body-emphasis text-decoration-none']) ?>
                     </li>
                 <?php endforeach; ?>
                 <li class="list-group-item">
-                    <a class='link-body-emphasis text-decoration-none' href="/blog/blog">همه</a>
+                    <?= Html::a('همه', '/home', ['class'=> 'link-body-emphasis text-decoration-none'])?>
                 </li>
                 </ul>
             </div>
@@ -211,20 +208,20 @@ use yii\helpers\Url;
             </div>
 
             <!-- About Section -->
-            <div class="card mt-4">
-                <div class="card-body">
-                    <p class="fw-bold fs-6">درباره ما</p>
-                    <p class="text-justify">
-                        لورم ایپسوم متن ساختگی با تولید سادگی
-                        نامفهوم از صنعت چاپ و با استفاده از
-                        طراحان گرافیک است. چاپگرها و متون بلکه
-                        روزنامه و مجله در ستون و سطرآنچنان که
-                        لازم است و برای شرایط فعلی تکنولوژی مورد
-                        نیاز و کاربردهای متنوع با هدف بهبود
-                        ابزارهای کاربردی می باشد.
-                    </p>
-                </div>
-            </div>
+                <!-- <div class="card mt-4">
+                    <div class="card-body">
+                        <p class="fw-bold fs-6">درباره ما</p>
+                        <p class="text-justify">
+                            لورم ایپسوم متن ساختگی با تولید سادگی
+                            نامفهوم از صنعت چاپ و با استفاده از
+                            طراحان گرافیک است. چاپگرها و متون بلکه
+                            روزنامه و مجله در ستون و سطرآنچنان که
+                            لازم است و برای شرایط فعلی تکنولوژی مورد
+                            نیاز و کاربردهای متنوع با هدف بهبود
+                            ابزارهای کاربردی می باشد.
+                        </p>
+                    </div>
+                </div> -->
         </div>
     </div>
 </section>

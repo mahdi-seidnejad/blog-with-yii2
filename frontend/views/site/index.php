@@ -1,7 +1,10 @@
 <?php 
 use yii\helpers\Html;
-?>
+use frontend\assets\AppAsset;
+AppAsset::register($this);
+use yii\helpers\Url;
 
+?>
 <div class="container">
     <main class="flex flex-col items-center justify-center h-screen">
         <h1 class="text-4xl font-extrabold mb-4">به سایت ما خوش آمدید!</h1>

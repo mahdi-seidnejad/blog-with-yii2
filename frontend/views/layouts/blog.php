@@ -2,26 +2,23 @@
 
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
+use yii\bootstrap5\BootstrapAsset;
 
 AppAsset::register($this);
+BootstrapAsset::register($this);
+
 ?>
 <!DOCTYPE html>
 <html dir="rtl" lang="fa">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>php tutorial || blog project || webprog.io</title>
+        <title>php tutorial || blog project || webprog.io</title>   
+        <!-- Bootstrap CSS -->
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
 
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-        />
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-            crossorigin="anonymous"
-        />
+<!-- Bootstrap Bundle with Popper -->
+
 
         <?php $this->head() ?>
     </head>
@@ -50,7 +47,19 @@ AppAsset::register($this);
             
 
             <footer class="text-center pt-4 my-md-5 pt-md-5 border-top">
-                <div class="row flex-column">
+                <div class="row flex-column ">
+                    <div class='container py-3'>
+                        <p class="fw-bold fs-6">درباره ما</p>
+                        <p class="text-justify">
+                            لورم ایپسوم متن ساختگی با تولید سادگی
+                            نامفهوم از صنعت چاپ و با استفاده از
+                            طراحان گرافیک است. چاپگرها و متون بلکه
+                            روزنامه و مجله در ستون و سطرآنچنان که
+                            لازم است و برای شرایط فعلی تکنولوژی مورد
+                            نیاز و کاربردهای متنوع با هدف بهبود
+                            ابزارهای کاربردی می باشد.
+                        </p>
+                    </div>
                     <div>
                         <p class="">
                             کلیه حقوق محتوا این سایت متعلق به وب سایت Heydari.io
@@ -75,11 +84,7 @@ AppAsset::register($this);
                 </div>
             </footer>
         </div>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-            crossorigin="anonymous"
-        ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 
     </html>

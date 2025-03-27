@@ -80,7 +80,9 @@ class SiteController extends Controller
      * Displays homepage.
      *
      * @return mixed
-     */
+     */        
+    public $layout = 'blog';
+
     public function actionIndex()
     {
         return $this->render('index');
