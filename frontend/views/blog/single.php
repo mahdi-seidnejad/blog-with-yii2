@@ -1,8 +1,11 @@
 <?php
-use frontend\assets\AppAsset;
+    use frontend\assets\AppAsset;
+use SebastianBergmann\CodeCoverage\Report\PHP;
 use yii\helpers\Html;
-AppAsset::register($this);
-use yii\bootstrap5\Modal;
+    AppAsset::register($this);
+    use yii\bootstrap5\Modal;
+    use yii\helpers\Url;
+    use yii\widgets\Pjax;
 ?>
                 <!-- Content -->
             <div class="container py-3">
@@ -89,36 +92,88 @@ use yii\bootstrap5\Modal;
                                             </form>
                                         </div>
                                     </div>
-
-                                    <hr class="mt-4" />
+                                   <?php Pjax::begin();?>
+                                <hr class="mt-4" />
                                     <!-- Comment Content -->
                                     <p class="fw-bold fs-6">کامنت ها:</p>
-                                    <?php foreach ($comments as $comment): ?>
-                                    <div class="card bg-light-subtle mb-3">
+                                    <?php foreach ($comments as $comment): 
+                                    if ($comment->comment_id==null){
+                                        ?>
+
+                                    <div class="card  mb-3">
                                         <div class="card-body">
                                             <div class="d-flex align-items-center">
                                                 <h5 class="card-title me-2 mb-0"><?= Html::encode($comment->writer) ?></h5>
                                             </div>
                                             <div class='row'>
                                                 <div class='col'>
-                                                    <p class="card-text pt-3 pr-3 mr-2"><?= Html::encode($comment->body) ?></p>
+                                                    <p class="card-text pt-3 pr-3 me-4"><?= Html::encode($comment->body) ?></p>
                                                 </div>
                                                 <div class='col-6'></div>
                                                 <div class='col-1 g-0'>
-                                                    <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#myModal">
-                                                        <img  class="img-fluid w-150" src="/images/reply_icon.png" alt="reply">
-                                                    </button>
-                                                </div>
+
+                                                        <?= Html::a('<img class="img-fluid w-150" src="/images/reply_icon.png" alt="reply">', 
+                                                            ['reply', 'comment_id' => 123, 'post' => 456], 
+                                                            [   'data-url' => Url::to(['blog/reply', 'comment_id' => $comment->id , 'post'=>$post->id]),
+                                                                'data-bs-toggle' => 'modal',
+                                                                'data-bs-target' => '#myModal',
+                                                                'class' => 'btn',
+                                                                'id' => 'open-modal',
+                                                            ]
+                                                        ); ?>
+
+                                                        <?php
+                                                            Modal::begin([
+                                                                'id' => 'myModal',
+                                                                'title' => 'پاسخ دادن به کامنت',
+                                                                'size' => Modal::SIZE_LARGE,
+                                                                'closeButton' => ['class' => 'btn-close', 'data-bs-dismiss' => 'modal'],
+                                                                'options' => ['tabindex' => '-1'],
+                                                            ]);
+                                                            ?>
+                                                            <div class="modal-body" id="modal-content">در حال بارگذاری...</div>
+                                                            <?php Modal::end(); ?>
+
+
+                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                        <hr class="mt-4  bg-body-secondary" />
+                                    <!-- Comment Content -->
+
+                                        <?php foreach ($comments as $reply){ 
+                                            if ($comment->id == $reply->comment_id and $reply->comment_id!=null){
+                                            ?>
+                                            <!-- <p class="fw-bold fs-6"> واکنش ها:</p> -->
+                                                <div class="card bg-light -subtle mb-3 me-5 ">
+                                                    <div class="card-body">
+                                                        <div class="d-flex align-items-center">
+                                                            <h5 class="card-title me-2 mb-0"><?= Html::encode($reply->writer) ?></h5>
+                                                        </div>
+                                                        <div class='row'>
+                                                            <div class='col'>
+                                                                <p class="card-text pt-3 pr-3 me-4"><?= Html::encode($reply->body) ?></p>
+                                                            </div>
+                                                            <div class='col-6'></div>
+                                                            <div class='col-1 g-0'>
+                                                                <!-- <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#myModal">
+                                                                    <img  class="img-fluid w-150" src="/images/reply_icon.png" alt="reply">
+                                                                </button> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <?php }
+                                        }
+                                     } ?>
                                     <?php endforeach; ?>
 
 
                                 </div>
                             </div>
                         </div>
-
+                    <?php Pjax::end(); ?>
                         <!-- Sidebar Section -->
         <div class="col-lg-4">
             <!-- Sesrch Section -->
@@ -133,6 +188,7 @@ use yii\bootstrap5\Modal;
                     <p class="fw-bold fs-6">عضویت در خبرنامه</p>
 
                     <form method="post" action="<?= Yii::$app->urlManager->createUrl(['site/submit']) ?>">
+
                         <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->getCsrfToken(); ?>">
                         <div class="mb-3">
                             <label class="form-label">نام</label>
@@ -152,54 +208,33 @@ use yii\bootstrap5\Modal;
             <!-- About Section -->
 
 
-            <?php
-            Modal::begin([
-                'id' => 'myModal',
-                'title' => 'واکنش',
-                'size' => Modal::SIZE_LARGE, 
-                'closeButton' => ['class' => 'btn-close m-2', 'data-bs-dismiss' => 'modal'],
-                'options' => ['tabindex' => '-1'], 
-            ]);
-            ?>
-            <form method="post" action='<?= Yii::$app->urlManager->createUrl(['site/comment']) ?>'>
-            <input type="hidden" name="post_id" value="<?= Html::encode($post->id) ?>">
 
-            <div class="mb-3">
-                <label class="form-label"
-                    >نام</label
-                >
-                <input
-                    type="text"
-                    class="form-control"
-                    name="writer"
-                />
-            </div>
-            <div class="mb-3">
-                <label class="form-label"
-                    >متن کامنت</label
-                >
-                <textarea
-                    class="form-control"
-                    name='body'
-                    rows="3"
-                ></textarea>
-            </div>
-            <button
-                type="submit"
-                class="btn btn-dark"
-            >
-                ارسال
-            </button>
-        </form>
 
-            <?php Modal::end();
-            ?>
-            </div>
-            <?php 
-            // echo Yii::getAlias('@frontend'); 
-            // echo \Yii::getAlias('@web') . ' exists';
-            // var_dump(Yii::getAlias('@web'));
-            ?>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    console.log("✅ JavaScript is Loaded!");
+
+                    document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
+                        button.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            var url = this.getAttribute('data-url');
+                            
+                            console.log('Loading modal content from:', url);
+                            document.getElementById('modal-content').innerHTML = 'در حال بارگذاری...';
+
+                            fetch(url)
+                                .then(response => response.text())
+                                .then(data => {
+                                    document.getElementById('modal-content').innerHTML = data;
+                                })
+                                .catch(error => {
+                                    document.getElementById('modal-content').innerHTML = '<p class="text-danger">خطا در بارگذاری محتوا!</p>';
+                                    console.error("❌ Error loading modal content:", error);
+                                });
+                        });
+                    });
+                });
+            </script>
             </div>  
     </section>
 </div>

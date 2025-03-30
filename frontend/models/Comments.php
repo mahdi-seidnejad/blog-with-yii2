@@ -18,6 +18,7 @@ class Comments extends ActiveRecord
             ['writer', 'string', 'max' => 100],   
             ['body', 'string'],    
             ['post_id', 'integer'],
+            ['comment_id', 'integer']
         ];
     }
 }

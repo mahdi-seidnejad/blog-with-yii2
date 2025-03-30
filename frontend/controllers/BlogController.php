@@ -43,4 +43,13 @@ class BlogController extends Controller
         $count = Post::find()->where(['like','title',$kw])->count();
         return $this->render('search', ['posts' => $posts , 'categorys' => $categorys ,"kw"=>$kw, 'count'=>$count]);
     }
+    public function actionReply($comment_id, $post)
+    {   
+        return $this->renderPartial('_modal_content', [
+            'comment_id' => $comment_id,
+            'post' => $post,
+        ]);
+    }
+    
 }
+

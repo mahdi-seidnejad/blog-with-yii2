@@ -38,11 +38,7 @@ use yii\helpers\Html;
                                                 <?= Html::encode($post->title)?>
                                                 </h5>
                                                 <div>
-                                                    <span
-                                                        class="badge text-bg-secondary"
-                                                        ><?= Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ?>
-                                                        </span
-                                                    >
+
                                                     <?= Html::tag('span',Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ,['class' => 'badge text-bg-secondary'])?>
 
                                                 </div>

@@ -288,21 +288,31 @@ class SiteController extends Controller
         return $this->render('success');
     }
     public function actionComment()
-    {
+    {   
         $writer = Yii::$app->request->post('writer');
         $body = Yii::$app->request->post('body');
         $post_id = Yii::$app->request->post('post_id');
+        $comment_id = Yii::$app->request->post('comment_id');
         $comment = new Comments();
         $comment->writer = $writer;
         $comment->body = $body;
         $comment->post_id = $post_id;
+        $comment->comment_id = $comment_id;
         if ($comment->save()) {
             Yii::$app->session->setFlash('success', 'نظر شما با موفقیت ثبت شد.');
         } else {
             Yii::$app->session->setFlash('error', 'خطا در ثبت نظر.');
         }
-        return $this->redirect(['site/success']);
+        return $this->redirect(['/blog/single?id='.$post_id]);
     }
+    public function actionReply($comment_id, $post)
+    {
+        return $this->renderPartial('_modal_content', [
+            'comment_id' => $comment_id,
+            'post' => $post,
+        ]);
+    }
+    
 }
 
 
