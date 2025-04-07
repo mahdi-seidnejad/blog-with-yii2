@@ -9,6 +9,7 @@ use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -288,7 +289,38 @@ class SiteController extends Controller
     {
         return $this->render('success');
     }
-
+    public function actionUploadImage()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        try {
+            $file = UploadedFile::getInstanceByName('file');
+            
+            if (!$file) {
+                throw new \Exception('No file uploaded');
+            }
+    
+            $uploadDir = Yii::getAlias('@webroot/uploads/images');
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+    
+            $fileName = time() . '_' . uniqid() . '.' . $file->extension;
+            $filePath = $uploadDir . '/' . $fileName;
+    
+            if (!$file->saveAs($filePath)) {
+                throw new \Exception('Failed to save file');
+            }
+    
+            return [
+                'link' => Yii::getAlias('@web/uploads/images/' . $fileName)
+            ];
+            
+        } catch (\Exception $e) {
+            Yii::error($e->getMessage());
+            return ['error' => $e->getMessage()];
+        }
+    }
 
     
     

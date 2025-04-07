@@ -1,0 +1,76 @@
+2025-04-05 06:21:29 [127.0.0.1][-][agppg0klno8tae5l04cghuj5av][error][yii\base\InvalidConfigException] yii\base\InvalidConfigException: The directory does not exist:  in /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/AssetManager.php:238
+Stack trace:
+#0 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/AssetManager.php(555): yii\web\AssetManager->checkBasePathPermission()
+#1 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/AssetManager.php(487): yii\web\AssetManager->publishDirectory()
+#2 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/AssetBundle.php(181): yii\web\AssetManager->publish()
+#3 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/AssetManager.php(294): yii\web\AssetBundle->publish()
+#4 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/AssetManager.php(265): yii\web\AssetManager->loadBundle()
+#5 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/View.php(301): yii\web\AssetManager->getBundle()
+#6 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/AssetBundle.php(125): yii\web\View->registerAssetBundle()
+#7 /home/mahdi/avaPardaz/learn_yii/app/backend/views/site/login.php(4): yii\web\AssetBundle::register()
+#8 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/View.php(348): require('...')
+#9 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/View.php(258): yii\base\View->renderPhpFile()
+#10 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/View.php(157): yii\base\View->renderFile()
+#11 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/Controller.php(407): yii\base\View->render()
+#12 /home/mahdi/avaPardaz/learn_yii/app/backend/controllers/SiteController.php(89): yii\base\Controller->render()
+#13 [internal function]: backend\controllers\SiteController->actionLogin()
+#14 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array()
+#15 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/Controller.php(178): yii\base\InlineAction->runWithParams()
+#16 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/Module.php(552): yii\base\Controller->runAction()
+#17 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/web/Application.php(103): yii\base\Module->runAction()
+#18 /home/mahdi/avaPardaz/learn_yii/app/vendor/yiisoft/yii2/base/Application.php(384): yii\web\Application->handleRequest()
+#19 /home/mahdi/avaPardaz/learn_yii/app/backend/web/index.php(18): yii\base\Application->run()
+#20 {main}
+2025-04-05 06:21:29 [127.0.0.1][-][agppg0klno8tae5l04cghuj5av][info][application] $_GET = [
+    'r' => 'site/login'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    '_csrf-frontend' => '31682e412fa5bad934107e5a5eefedb51a48a3c1f7d7298a0c85e161837d4cbca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"CU8DzrA-iXKAs1JsJt4rHRZeUM280IPC\";}'
+    'XDEBUG_SESSION' => 'XDEBUG_ECLIPSE'
+    'advanced-backend' => 'agppg0klno8tae5l04cghuj5av'
+    '_csrf-backend' => '9e5e53e59d2129dfb21bf1f2d59187c79128ab15128fd0e2706c6818eba62433a:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"dNdPdRmbzaxvyPcbXNw8tT52F9kvAKjX\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => 'http://localhost:8002/'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/home/mahdi/avaPardaz/learn_yii/app/backend/web'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'REMOTE_PORT' => '52716'
+    'SERVER_SOFTWARE' => 'PHP 8.1.2-1ubuntu2.21 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8002'
+    'REQUEST_URI' => '/index.php?r=site%2Flogin'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/home/mahdi/avaPardaz/learn_yii/app/backend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=site%2Flogin'
+    'HTTP_HOST' => 'localhost:8002'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\"134\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"Linux\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7'
+    'HTTP_SEC_FETCH_SITE' => 'cross-site'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br, zstd'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9'
+    'HTTP_COOKIE' => '_csrf-frontend=31682e412fa5bad934107e5a5eefedb51a48a3c1f7d7298a0c85e161837d4cbca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22CU8DzrA-iXKAs1JsJt4rHRZeUM280IPC%22%3B%7D; XDEBUG_SESSION=XDEBUG_ECLIPSE; advanced-backend=agppg0klno8tae5l04cghuj5av; _csrf-backend=9e5e53e59d2129dfb21bf1f2d59187c79128ab15128fd0e2706c6818eba62433a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22dNdPdRmbzaxvyPcbXNw8tT52F9kvAKjX%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1743834089.8174
+    'REQUEST_TIME' => 1743834089
+]

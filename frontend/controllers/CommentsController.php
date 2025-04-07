@@ -6,6 +6,7 @@ use frontend\models\Post;
 use frontend\models\Category;
 use frontend\models\Comments;
 class CommentsController extends Controller{
+
     public function actionReply($comment_id, $post)
     {
 

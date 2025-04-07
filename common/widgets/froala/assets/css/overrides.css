@@ -1,0 +1,10 @@
+/* Remove license bar */
+a[href*="www.froala.com"] {
+  display: none !important;
+}
+
+/* Set default font-family for editor and placeholder */
+.royal-theme.fr-box.fr-basic .fr-element,
+.royal-theme .fr-wrapper .fr-placeholder {
+  font-family: IRANSans, sans-serif;
+}

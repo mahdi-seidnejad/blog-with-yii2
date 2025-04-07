@@ -67,3 +67,10 @@ body {
 .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
     border-radius: 10px;
 }
+.card {
+    max-width: 100%;
+    max-height: 100%;
+}
+.card-img-top{
+    height: 250px;
+}

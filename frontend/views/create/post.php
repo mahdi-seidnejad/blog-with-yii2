@@ -2,6 +2,8 @@
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+use common\widgets\froala\FroalaEditorWidget;
 AppAsset::register($this);
 ?>
                 <div class='container py-3'>
@@ -40,10 +42,20 @@ AppAsset::register($this);
                 <?= $form->field($model, 'image')->fileInput(['class'=>'form-control'])->label('تصویر مقاله') ?>
             </div>
         </div>
-        <div class='row mt-3'>
-            <div class='col'>
-                <?= $form->field($model, 'body')->textarea(['class' => 'form-control ', 'rows' => 7])->label('متن مقاله') ?>
-            </div>
+        <?= \froala\froalaeditor\FroalaEditorWidget::widget([
+    'model' => $model,
+    'attribute' => 'body',
+    'options' => ['id' => 'auletter-body'],
+    'clientOptions' => [
+        'imageUpload' => true,
+        'imageUploadURL' => \yii\helpers\Url::to(['/site/upload-image']),
+        'imageUploadMethod' => 'POST',
+        'imageUploadParams' => [
+            'YII_CSRF_TOKEN' => Yii::$app->request->csrfToken,
+        ],
+        'toolbarButtons' => ['bold', 'italic', 'underline', 'insertImage'],
+    ],
+]); ?>
         </div>
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">

@@ -1,81 +1,96 @@
 <?php
 
-/** @var \yii\web\View $this */
-/** @var string $content */
-
-use backend\assets\AppAsset;
-use common\widgets\Alert;
-use yii\bootstrap5\Breadcrumbs;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
+use frontend\assets\AppAsset;
+use yii\helpers\Html;
+use yii\bootstrap5\BootstrapAsset;
 
 AppAsset::register($this);
+BootstrapAsset::register($this);
+
 ?>
-<?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+<html dir="rtl" lang="fa">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>php tutorial || blog project || webprog.io</title>   
+        <!-- Bootstrap CSS -->
+        <!-- <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.pjax/2.0.1/jquery.pjax.min.js"></script> -->
+
+        <script>
+    console.log('jQuery:', typeof jQuery);
+</script>
+
+<!-- Bootstrap Bundle with Popper -->
+
+
+    <?= $this->head() ?>    
 </head>
-<body class="d-flex flex-column h-100">
-<?php $this->beginBody() ?>
+    <body>
 
-<header>
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    }     
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
-        'items' => $menuItems,
-    ]);
-    if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
-    } else {
-        echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout text-decoration-none']
-            )
-            . Html::endForm();
-    }
-    NavBar::end();
-    ?>
-</header>
+            <header
+                class=" pb-3 mb-4 border-bottom"
+            >
+                <div class="container py-3 align-items-center d-flex flex-column flex-md-row ">
 
-<main role="main" class="flex-shrink-0">
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
-</main>
+                    <?= Html::a('Heydari.io', ['/home'], ['class' => 'fs-4 fw-medium link-body-emphasis text-decoration-none']) ?>
+                    <nav class="d-inline-flex mt-2 mt-md-0 me-md-auto">
 
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
-<?php $this->endBody() ?>
-</body>
-</html>
-<?php $this->endPage();
+                        <?= Html::a('افزودن پست', ['create/post'], ['class' => 'me-3 py-2 link-body-emphasis text-decoration-none']) ?>
+
+                        <?= Html::a('صفحه اصلی', ['/home'], ['class' => 'fw-bold me-3 py-2 link-body-emphasis text-decoration-none']) ?>
+                    </nav>
+                </div>
+            </header>
+
+
+            <main> 
+                <?= $content ?>
+            </main>
+            
+
+            <footer class="text-center pt-4 my-md-5 pt-md-5 border-top">
+                <div class="row flex-column ">
+                    <div class='container py-3'>
+                        <p class="fw-bold fs-6">درباره ما</p>
+                        <p class="text-justify">
+                            لورم ایپسوم متن ساختگی با تولید سادگی
+                            نامفهوم از صنعت چاپ و با استفاده از
+                            طراحان گرافیک است. چاپگرها و متون بلکه
+                            روزنامه و مجله در ستون و سطرآنچنان که
+                            لازم است و برای شرایط فعلی تکنولوژی مورد
+                            نیاز و کاربردهای متنوع با هدف بهبود
+                            ابزارهای کاربردی می باشد.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="">
+                            کلیه حقوق محتوا این سایت متعلق به وب سایت Heydari.io
+                            میباشد
+                        </p>
+                    </div>
+                    <div>
+                        <a href="#"
+                            ><i
+                                class="bi bi-telegram fs-3 text-secondary ms-2"
+                            ></i
+                        ></a>
+                        <a href="#"
+                            ><i
+                                class="bi bi-whatsapp fs-3 text-secondary ms-2"
+                            ></i
+                        ></a>
+                        <a href="#"
+                            ><i class="bi bi-instagram fs-3 text-secondary"></i
+                        ></a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </body>
+
+    </html>

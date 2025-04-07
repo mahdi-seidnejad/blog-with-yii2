@@ -22,27 +22,15 @@
                     <div class='col-6'></div>
                     <div class='col-1 g-0'>
 
-                            <?= Html::a('<img class="img-fluid w-150" src="/images/reply_icon.png" alt="reply">', 
-                                ['reply', 'comment_id' => $comment->id , 'post' => $post->id], 
-                                [   'data-url' => Url::to(['/comments/reply', 'comment_id' => $comment->id , 'post'=>$post->id]),
-                                    'data-bs-toggle' => 'modal',
-                                    'data-bs-target' => '#myModal',
-                                    'class' => 'btn',
-                                    'id' => 'open-modal',
-                                ]
-                            ); ?>
-
-                            <?php
-                                    Modal::begin([
-                                    'id' => 'myModal',
-                                    'title' => 'پاسخ دادن به کامنت',
-                                    'size' => Modal::SIZE_LARGE,
-                                    'closeButton' => ['class' => 'btn-close', 'data-bs-dismiss' => 'modal'],
-                                    'options' => ['tabindex' => '-1'],
-                                ]);
-                                ?>
-                                <div class="modal-body" id="modal-content">در حال بارگذاری...</div>
-                                <?php Modal::end(); ?>
+                    <?= Html::button(
+                            Html::img('/images/reply_icon.png', ['class' => 'img-fluid w-150', 'alt' => 'reply']),
+                            [
+                                'class' => 'btn reply-button',
+                                'data-url' => Url::to(['/comments/reply', 'comment_id' => $comment->id, 'post' => $post->id]),
+                                'data-bs-toggle' => 'modal',
+                                'data-bs-target' => '#myModal',
+                            ]
+                        ) ?>
 
 
                         </div>
@@ -72,6 +60,7 @@
                             </div>
                         </div>
                     </div>
+
             <?php }
             }
             } ?>

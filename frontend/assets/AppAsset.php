@@ -5,17 +5,19 @@ use yii\web\AssetBundle;
 
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@frontend/assets'; // مسیر درست
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
     public $css = [
+        'css/style.css',
         'css/bootstrap.min.css', // مسیر صحیح
+
     ];
     public $js = [
-        'js/bootstrap.bundle.min.js', // مسیر صحیح
+        'js/bootstrap.bundle.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapPluginAsset',
-        'yii\web\JqueryAsset',
+        'yii\bootstrap5\BootstrapAsset',
     ];
 }
 

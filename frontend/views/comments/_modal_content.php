@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 ?>
 
 <form id="reply-form" method="post" action='<?= Yii::$app->urlManager->createUrl(['comments/comment','id'=>$post]) ?>' data-pjax="true">
@@ -19,5 +21,11 @@ use yii\helpers\Html;
     </div>
     
     <button type="submit" class="btn btn-dark">ارسال</button>
+
 </form>
+<?php 
+
+
+
+?>
 

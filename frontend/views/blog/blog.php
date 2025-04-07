@@ -4,97 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 AppAsset::register($this);
 use yii\helpers\Url;
+use yii\helpers\StringHelper;
+
 ?>
 
 
 <div class="container py-3">
-<!-- <section>
-    <div id="carousel" class="carousel slide">
-        <div class="carousel-indicators">
-            <button
-                type="button"
-                data-bs-target="#carousel"
-                data-bs-slide-to="0"
-                class="active"
-            ></button>
-            <button
-                type="button"
-                data-bs-target="#carousel"
-                data-bs-slide-to="1"
-            ></button>
-            <button
-                type="button"
-                data-bs-target="#carousel"
-                data-bs-slide-to="2"
-            ></button>
-        </div>
-        <div class="carousel-inner rounded">
-            <div
-                class="carousel-item overlay carousel-height active"
-            >
-                <img
-                    src="
-                    /images/1.jpg"
-                    class="d-block w-100"
-                    alt="post-image"
-                />
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>لورم ایپسوم متن</h5>
-                    <p>
-                        لورم ایپسوم متن ساختگی با تولید سادگی
-                        نامفهوم از صنعت چاپ و با استفاده
-                    </p>
-                </div>
-            </div>
-            <div class="carousel-item carousel-height overlay">
-                <img
-                    src="/images/1.jpg"
-                    class="d-block w-100"
-                    alt="post-image"
-                />
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>لورم ایپسوم متن</h5>
-                    <p>
-                        لورم ایپسوم متن ساختگی با تولید سادگی
-                        نامفهوم از صنعت چاپ و با استفاده
-                    </p>
-                </div>
-            </div>
-            <div class="carousel-item carousel-height overlay">
-                <img
-                    src="/images/1.jpg"
-                    class="d-block w-100"
-                    alt="post-image"
-                />
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>لورم ایپسوم متن</h5>
-                    <p>
-                        لورم ایپسوم متن ساختگی با تولید سادگی
-                        نامفهوم از صنعت چاپ و با استفاده
-                    </p>
-                </div>
-            </div>
-        </div>
-        <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carousel"
-            data-bs-slide="prev"
-        >
-            <span class="carousel-control-prev-icon"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carousel"
-            data-bs-slide="next"
-        >
-            <span class="carousel-control-next-icon"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</section> -->
 
 <!-- Content Section -->
 <section class="mt-4">
@@ -125,7 +40,9 @@ use yii\helpers\Url;
                             <p
                                 class="card-text text-secondary pt-3"
                             >
-                                <?= Html::encode($post->body)?>
+
+                            <?= StringHelper::truncate($post->body, 10) ?>
+
                             </p>
                             <div
                                 class="d-flex justify-content-between align-items-center"
