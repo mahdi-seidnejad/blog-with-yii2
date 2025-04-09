@@ -28,7 +28,9 @@ class BlogController extends Controller
     public function actionSingle($id)
     {
         $categorys = Category::find()->orderBy(['created_at' => SORT_DESC])->all();
-        $posts = Post::find()->where(['id' => $id])->all();
+        $posts = Post::find()->where(['id' => $id])->one();
+        $categoryId = $posts->category_id;
+        $samePost = Post::find()->where(['category_id' => $categoryId])->orderBy(['id' => SORT_DESC])->all();
         $comments = Comments::find()->where(['post_id' => $id])->all();
         $comment = new Comments();
         if ($comment->load(Yii::$app->request->post(), '') && $comment->save()) {
@@ -36,9 +38,11 @@ class BlogController extends Controller
             $comment = new Comments();
         }
         return $this->render('single', [
-            'posts' => $posts , 
+            'post' => $posts , 
             'categorys' => $categorys, 
-            'comments' => $comments]);
+            'comments' => $comments,
+            'samePosts' => $samePost,
+        ]);      
     }
     public function actionSearch()
     {   

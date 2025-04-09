@@ -18,11 +18,11 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-    <body>
+    <body class="site-bg">
     <?php $this->beginBody() ?>
 
             <header
-                class=" pb-3 mb-4 border-bottom"
+                class=" pb-3 mb-4 border-bottom bg-body-secondary"
             >
                 <div class="container py-3 align-items-center d-flex flex-column flex-md-row ">
 

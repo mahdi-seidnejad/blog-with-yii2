@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use common\widgets\froala\FroalaEditorWidget;
 AppAsset::register($this);
 ?>
-                <div class='container py-3'>
+<div class='container py-3'>
                     <div
                         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
                     >
@@ -56,11 +56,12 @@ AppAsset::register($this);
         'toolbarButtons' => ['bold', 'italic', 'underline', 'insertImage'],
     ],
 ]); ?>
-        </div>
+        
         <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('ایجاد', ['class' => 'btn btn-dark']) ?>
-            </div>
+        <div class="col-lg-offset-1 col-lg-11 text-start">
+    <?= Html::submitButton('ایجاد', ['class' => 'btn btn-dark']) ?>
+        </div>
+
         </div>
     <?php ActiveForm::end() ?>
 </div>

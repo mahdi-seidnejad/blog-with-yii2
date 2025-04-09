@@ -10,22 +10,24 @@
     use yii\web\JqueryAsset;
     use yii\widgets\PjaxAsset;
     JqueryAsset::register($this);
-PjaxAsset::register($this);
+    PjaxAsset::register($this);
+    use yii\helpers\StringHelper;
+
 ?>
                 <!-- Content -->
             <div class="container py-3">
                 <section class="mt-4">
                     <div class="row">
                         <!-- Posts & Comments Content -->
-                        <div class="col-lg-8">
+                        <div class="col">
                             <div class="row justify-content-center">
                                 <!-- Post Section -->
-                                <?php foreach ($posts as $post):?>
+
                                 <div class="col">
                                     <div class="card">
                                         <img
-                                            src="/images/<?= Html::encode($post->image)?>"
-                                            class="card-img-top"
+                                        src="https://s3.ir-thr-at1.arvanstorage.com/mahdi-blog/post/images/<?= Html::encode($post->image)?>"
+                                            class="card-img-top single-image"
                                             alt="post-image"
                                         />
                                         <div class="card-body">
@@ -33,7 +35,7 @@ PjaxAsset::register($this);
                                                 class="d-flex justify-content-between"
                                             >
                                                 <h5 class="card-title fw-bold">
-                                                    لورم ایپسوم
+                                                    <?=Html::encode($post->title)?>
                                                 </h5>
                                                 <div>
                                                 <?= Html::tag('span',Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ,['class' => 'badge text-bg-secondary'])?>
@@ -55,7 +57,7 @@ PjaxAsset::register($this);
                                         </div>
                                     </div>
                                 </div>
-                                 <?php endforeach ?>
+
                                 <hr class="mt-4" />
                                 <!-- Comment Section -->
                                 <div class="col">
@@ -66,7 +68,7 @@ PjaxAsset::register($this);
                                                 ارسال کامنت
                                             </p>
                                             <!-- comment form -->
-                                            <form class=" mb-2" id="comment-form" data-pjax="true" method="post" action='<?= Yii::$app->urlManager->createUrl(['comments/comment','id'=>$posts[0]->id]) ?>'>
+                                            <form class=" mb-2" id="comment-form" data-pjax="true" method="post" action='<?= Yii::$app->urlManager->createUrl(['comments/comment','id'=>$post->id]) ?>'>
                                                 <input type="hidden" name="post_id" value="<?= Html::encode($post->id) ?>">
                                                 <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>">
 
@@ -108,75 +110,60 @@ PjaxAsset::register($this);
                                     <?php Pjax::end(); ?>
 
                         <!-- Sidebar Section -->
-        <div class="col-lg-4">
-            <!-- subscrib -->
-                <div class="card ">
-                    <div class="card-body">
-                        <p class="fw-bold fs-6">عضویت در خبرنامه</p>
 
-                        <form method="post" action="<?= Yii::$app->urlManager->createUrl(['site/submit']) ?>">
-
-                            <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->getCsrfToken(); ?>">
-                            <div class="mb-3">
-                                <label class="form-label">نام</label>
-                                <input type="text" name="name" class="form-control" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">ایمیل</label>
-                                <input type="email" name="email" class="form-control" />
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-secondary">ارسال</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-        </div>
         <h2>            پست های مشابه:
 </h2> 
-        <div class="container row border-top-2 mt-4">
+<div class="row container p-0">
+    <?php 
+    $counter = 0;
+    foreach($samePosts as $samePost):
+        if ($counter>2){
+            break;
+        }
+        $counter++;
+    ?>
 
-            <div class="col-lg-4 ">
+
+            <div class="col-lg-4 pr-0">
                 <div class="card ">
-                    <div class="card-body">
+                    <div class="card-body same-post-card">
                         <img
-                                                src="/images/<?= Html::encode($post->image)?>"
-                                                class="card-img-top"
-                                                alt="post-image"
-                                            />
+                        src="https://s3.ir-thr-at1.arvanstorage.com/mahdi-blog/post/images/<?= Html::encode($samePost->image)?>"
+                            class="card-img-top blog-image"
+                            alt="post-image"
+                        />
 
-                        <form method="post" action="<?= Yii::$app->urlManager->createUrl(['site/submit']) ?>">
-
-                            <input type="hidden" name="_csrf" value="<?php echo Yii::$app->request->getCsrfToken(); ?>">
                             <div class="row border-bottom">
                                 <div class="col-9">
                                     <div class="mb-3">
-                                        <p class="h3">تایتل</p>
+                                        <p class="h3"><?=Html::encode($samePost->title)?></p>
                                     </div>
                                 </div>
                                 <div class="col">
-                                <?= Html::tag('span',"دسته بندی" ,['class' => 'badge text-bg-secondary'])?>
+                                <?= Html::tag('span',Html::encode($post->category ? $post->category->name : 'بدون دسته‌بندی') ,['class' => 'badge text-bg-secondary'])?>
                                 </div>
                                 <div>
-                                    <p>سنتیمرذخیرذهنحخرذتاجحصیذاخجگحکسذتخ ...</p>
+                                <?= StringHelper::truncate($samePost->body, 10) ?>
                                 </div>
                             </div>
+                        <div class="bottem-card">
                             <div>
                                 <p class="fs-7 mb-0">
-                                    نویسنده : <?= Html::encode($post->writer)?>
+                                    نویسنده : <?= Html::encode($samePost->writer)?>
                                 </p>
                             </div>
-                       
+                        
                             <div class="d-grid gap-2 mt-3">
-                                <button type="submit" class="btn btn-secondary">مشاهده</button>
+                            <?= Html::a('مشاهده', Url::to(['single', 'id' => Html::encode($samePost->id)]), ['class' => 'btn btn-sm btn-dark']) ?>
                             </div>
-                        </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
-        </div>
-
+    <?php endforeach?>
+</div>
 
 
 

@@ -21,8 +21,8 @@ use yii\helpers\StringHelper;
                 <div class="col-sm-6">
                     <div class="card">
                         <img
-                            src="/images/<?= Html::encode($post->image)?>"
-                            class="card-img-top"
+                            src="https://s3.ir-thr-at1.arvanstorage.com/mahdi-blog/post/images/<?= Html::encode($post->image)?>"
+                            class="card-img-top  "
                             alt="post-image"
                         />
                         <div class="card-body">
@@ -124,21 +124,7 @@ use yii\helpers\StringHelper;
                 </div>
             </div>
 
-            <!-- About Section -->
-                <!-- <div class="card mt-4">
-                    <div class="card-body">
-                        <p class="fw-bold fs-6">درباره ما</p>
-                        <p class="text-justify">
-                            لورم ایپسوم متن ساختگی با تولید سادگی
-                            نامفهوم از صنعت چاپ و با استفاده از
-                            طراحان گرافیک است. چاپگرها و متون بلکه
-                            روزنامه و مجله در ستون و سطرآنچنان که
-                            لازم است و برای شرایط فعلی تکنولوژی مورد
-                            نیاز و کاربردهای متنوع با هدف بهبود
-                            ابزارهای کاربردی می باشد.
-                        </p>
-                    </div>
-                </div> -->
+
         </div>
     </div>
 </section>

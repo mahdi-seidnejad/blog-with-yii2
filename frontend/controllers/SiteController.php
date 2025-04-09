@@ -290,37 +290,52 @@ class SiteController extends Controller
         return $this->render('success');
     }
     public function actionUploadImage()
-    {
-        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        
-        try {
-            $file = UploadedFile::getInstanceByName('file');
-            
-            if (!$file) {
-                throw new \Exception('No file uploaded');
-            }
-    
-            $uploadDir = Yii::getAlias('@webroot/uploads/images');
-            if (!file_exists($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
-    
-            $fileName = time() . '_' . uniqid() . '.' . $file->extension;
-            $filePath = $uploadDir . '/' . $fileName;
-    
-            if (!$file->saveAs($filePath)) {
-                throw new \Exception('Failed to save file');
-            }
-    
-            return [
-                'link' => Yii::getAlias('@web/uploads/images/' . $fileName)
-            ];
-            
-        } catch (\Exception $e) {
-            Yii::error($e->getMessage());
-            return ['error' => $e->getMessage()];
+{
+    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+    try {
+        $file = UploadedFile::getInstanceByName('file');
+
+        if (!$file) {
+            throw new \Exception('No file uploaded');
         }
+
+        // ساخت مسیر موقت
+        $fileName = time() . '_' . uniqid() . '.' . $file->extension;
+        $tempPath = Yii::getAlias('@frontend/web/uploads/tmp/') . $fileName;
+
+        // ذخیره فایل به صورت موقت روی سرور
+        if (!$file->saveAs($tempPath)) {
+            throw new \Exception('Failed to save file locally');
+        }
+
+        // مسیر مقصد در S3 (مثلاً داخل پوشه froala/images)
+        $key = 'froala/images/' . $fileName;
+
+        // آپلود به S3
+        $result = Yii::$app->s3->putObject([
+            'Bucket' => 'mahdi-blog',
+            'Key' => $key,
+            'SourceFile' => $tempPath,
+            'ACL' => 'public-read',
+        ]);
+
+        // حذف فایل موقت
+        @unlink($tempPath);
+
+        if (!isset($result['ObjectURL'])) {
+            throw new \Exception('Failed to upload to S3');
+        }
+
+        // ارسال لینک نهایی برای Froala
+        return ['link' => $result['ObjectURL']];
+
+    } catch (\Exception $e) {
+        Yii::error($e->getMessage());
+        return ['error' => $e->getMessage()];
     }
+}
+
 
     
     
