@@ -6,11 +6,12 @@ use frontend\models\Post;
 use frontend\models\Category;
 use frontend\models\Comments;
 class CommentsController extends Controller{
-
+    public $layout='blog';
     public function actionReply($comment_id, $post)
     {
 
         $comment = new Comments();
+        $comment->writer = Yii::$app->user->identity->name;
         if ($comment->load(Yii::$app->request->post(), '') && $comment->save()) {
             $comment = new Comments();
         } 
@@ -23,20 +24,28 @@ class CommentsController extends Controller{
     }
     public function actionComment($id)
     {
+        if (!Yii::$app->user->isGuest){
+            $comment = new Comments();
+    
+            if ($comment->load(Yii::$app->request->post(), '')) {
+                $comment->writer = Yii::$app->user->identity->name;
 
-        $comment = new Comments();
-        if ($comment->load(Yii::$app->request->post(), '') && $comment->save()) {
-            $comments = Comments::find()->where(['post_id' => $id])->all();
-            $posts = Post::find()->where(['id' => $id])->one();
-            return $this->render(
-                '_comments',
-                [
-                'comments'=>$comments , 
-                'post'=>$posts]);
-            } 
-            else {
-                Yii::error("🚨 خطا در ذخیره کامنت: " . json_encode($comment->errors), __METHOD__);
-                return ['success' => false, 'errors' => $comment->errors];
+                if ($comment->save()) {
+
+    
+                    $comments = Comments::find()->where(['post_id' => $id])->all();
+                    $posts = Post::find()->where(['id' => $id])->one();
+    
+                    return $this->render('_comments', [
+                        'comments' => $comments,
+                        'post' => $posts,
+                    ]);
+                }
             }
+        } else {
+            Yii::$app->session->setFlash('error', 'لطفا ابتدا لاگین کنید');
+            return $this->redirect('/auth/login-form');
+        }
     }
+    
 }

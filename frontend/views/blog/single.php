@@ -71,18 +71,6 @@
                                             <form class=" mb-2" id="comment-form" data-pjax="true" method="post" action='<?= Yii::$app->urlManager->createUrl(['comments/comment','id'=>$post->id]) ?>'>
                                                 <input type="hidden" name="post_id" value="<?= Html::encode($post->id) ?>">
                                                 <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>">
-
-
-                                                <div class="mb-3">
-                                                    <label class="form-label"
-                                                        >نام</label
-                                                    >
-                                                    <input
-                                                        type="text"
-                                                        class="form-control"
-                                                        name="writer"
-                                                    />
-                                                </div>
                                                 <div class="mb-3">
                                                     <label class="form-label"
                                                         >متن کامنت</label
@@ -109,7 +97,7 @@
                                         <?= $this->render('/comments/_comments', ['comments' => $comments, 'post' => $post]) ?>
                                     <?php Pjax::end(); ?>
 
-                        <!-- Sidebar Section -->
+
 
         <h2>            پست های مشابه:
 </h2> 
@@ -166,8 +154,6 @@
 </div>
 
 
-
-
                             <?php
                                     Modal::begin([
                                     'id' => 'myModal',
@@ -204,10 +190,7 @@ $this->registerJs(<<<JS
 
                 $("#comment-form")[0].reset();
             },
-            error: function() {
-                console.error("❌ خطا در ارسال کامنت!");
-                alert("❌ خطا در ارسال کامنت!");
-            }
+
         });
     });
     // $(document).on("submit", "#reply-form", function(event) {

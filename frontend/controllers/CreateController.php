@@ -21,42 +21,46 @@ class CreateController extends Controller
         $model = new Post();
         $categorys = Category::find()->asArray()->orderBy(['created_at' => SORT_DESC])->all();
         $categorys = array_column($categorys, 'name', 'id');
-    
-        if ($model->load(Yii::$app->request->post())) {
-            $uploadedFile = UploadedFile::getInstance($model, 'image');
-    
-            if ($uploadedFile) {
-                $fileName = time() . '-' . $uploadedFile->baseName . '.' . $uploadedFile->extension;
-    
-                // مسیر موقت برای ذخیره فایل
-                $tempPath = Yii::getAlias('@frontend/web/uploads/tmp/') . $fileName;
-                if ($uploadedFile->saveAs($tempPath)) {
-    
-                    // آپلود به S3
-                    $key = 'post/images/' . time() . '-' . $uploadedFile->baseName . '.' . $uploadedFile->extension;
-                    $result = Yii::$app->s3->putObject([
-                        'Bucket' => 'mahdi-blog',
-                        'Key' => $key,
-                        'SourceFile' => $tempPath,
-                        'ACL' => 'public-read'
+        if (!Yii::$app->user->isGuest){
+            if ($model->load(Yii::$app->request->post())) {
+                $uploadedFile = UploadedFile::getInstance($model, 'image');
+        
+                if ($uploadedFile) {
+                    $fileName = time() . '-' . $uploadedFile->baseName . '.' . $uploadedFile->extension;
+        
+                    // مسیر موقت برای ذخیره فایل
+                    $tempPath = Yii::getAlias('@frontend/web/uploads/tmp/') . $fileName;
+                    if ($uploadedFile->saveAs($tempPath)) {
+        
+                        // آپلود به S3
+                        $key = 'post/images/' . time() . '-' . $uploadedFile->baseName . '.' . $uploadedFile->extension;
+                        $result = Yii::$app->s3->putObject([
+                            'Bucket' => 'mahdi-blog',
+                            'Key' => $key,
+                            'SourceFile' => $tempPath,
+                            'ACL' => 'public-read'
 
-                    ]);
-    
-                    @unlink($tempPath); // حذف فایل محلی
-    
-                    if (isset($result['ObjectURL'])) {
-                        // فقط اسم فایل رو ذخیره کن، یا می‌تونی URL کامل رو ذخیره کنی
-                        $model->image = $fileName; // یا $model->image = $result['ObjectURL'];
-                    } else {
-                        throw new \yii\web\ServerErrorHttpException('Failed to upload to S3.');
+                        ]);
+        
+                        @unlink($tempPath); // حذف فایل محلی
+        
+                        if (isset($result['ObjectURL'])) {
+                            // فقط اسم فایل رو ذخیره کن، یا می‌تونی URL کامل رو ذخیره کنی
+                            $model->image = $fileName; // یا $model->image = $result['ObjectURL'];
+                        } else {
+                            throw new \yii\web\ServerErrorHttpException('Failed to upload to S3.');
+                        }
                     }
                 }
             }
-    
+        }else{
+            Yii::$app->session->setFlash('error', 'لطفا ابتدا لاگین کنید');
+            return $this->redirect('/auth/login-form');
+        }
             if ($model->validate() && $model->save()) {
                 return $this->redirect('/site/success');
             }
-        }
+        
     
         return $this->render('post', [
             'categorys' => $categorys,

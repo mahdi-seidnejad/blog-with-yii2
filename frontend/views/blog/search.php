@@ -1,6 +1,7 @@
 <?php
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
+use yii\helpers\StringHelper;
 ?>
             <div class="container py-3">
                 <section class="mt-4">
@@ -10,7 +11,7 @@ use yii\helpers\Html;
                             <div class="row">
                                 <div class="col">
                                     <?php if ($count!=0 and $kw!='')  { ?>
-                                    <div class="alert alert-secondary">
+                                    <div class="alert alert-success">
                                         پست های مرتبط با کلمه [ <?php echo $kw ?> ]
                                     </div>
                                         <?php }else{ ?>
@@ -26,7 +27,7 @@ use yii\helpers\Html;
                                 <div class="col-sm-6">
                                     <div class="card">
                                         <img
-                                            src="/images/<?= Html::encode($post->image)?>"
+                                            src="https://s3.ir-thr-at1.arvanstorage.com/mahdi-blog/post/images/<?= Html::encode($post->image)?>"
                                             class="card-img-top"
                                             alt="post-image"
                                         />
@@ -46,7 +47,7 @@ use yii\helpers\Html;
                                             <p
                                                 class="card-text text-secondary pt-3"
                                             >
-                                                <?= Html::encode($post->body)?>
+                                            <?= StringHelper::truncate($post->body, 30) ?>
                                             </p>
                                             <div
                                                 class="d-flex justify-content-between align-items-center"
@@ -87,7 +88,7 @@ use yii\helpers\Html;
                                 class="btn btn-secondary"
                                 type="submit"
                             >
-                                <i class="bi bi-search"></i>
+                            <img src="/images/search.png" class="search-img" alt="">
                             </button>
                         </div>
                     </form>

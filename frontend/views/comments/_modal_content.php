@@ -10,10 +10,7 @@ use yii\widgets\ActiveForm;
     <input type="hidden" name="comment_id" value="<?= Html::encode($comment_id) ?>">
     <input type="hidden" name="post_id" value="<?= Html::encode($post) ?>">
 
-    <div class="mb-3">
-        <label class="form-label">نام</label>
-        <input type="text" class="form-control" name="writer" required />
-    </div>
+
     
     <div class="mb-3">
         <label class="form-label">متن کامنت</label>

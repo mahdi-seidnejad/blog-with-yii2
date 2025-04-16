@@ -10,7 +10,11 @@ use yii\helpers\StringHelper;
 
 
 <div class="container py-3">
-
+<?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-success ">
+                <?= Yii::$app->session->getFlash('success') ?>
+            </div>
+        <?php endif; ?>
 <!-- Content Section -->
 <section class="mt-4">
     <div class="row">
@@ -19,10 +23,11 @@ use yii\helpers\StringHelper;
             <div class="row g-3">
             <?php foreach ($posts as $post):  ?>
                 <div class="col-sm-6">
-                    <div class="card">
+                    <div class="card posts">
                         <img
                             src="https://s3.ir-thr-at1.arvanstorage.com/mahdi-blog/post/images/<?= Html::encode($post->image)?>"
-                            class="card-img-top  "
+                            loading="lazy"
+                            class="card-img-top fade-in-img"
                             alt="post-image"
                         />
                         <div class="card-body">
@@ -41,7 +46,7 @@ use yii\helpers\StringHelper;
                                 class="card-text text-secondary pt-3"
                             >
 
-                            <?= StringHelper::truncate($post->body, 10) ?>
+                            <?= StringHelper::truncate($post->body, 30) ?>
 
                             </p>
                             <div
@@ -80,7 +85,7 @@ use yii\helpers\StringHelper;
                                 class="btn btn-secondary"
                                 type="submit"
                             >
-                                <i class="bi bi-search"></i>
+                                <img src="/images/search.png" class="search-img" alt="">
                             </button>
                         </div>
                     </form>
@@ -93,7 +98,7 @@ use yii\helpers\StringHelper;
                 <ul class="list-group list-group-flush p-0">
                 <?php  foreach ($categorys as $category): ?>
                     <li class="list-group-item">
-                        <?= Html::a(Html::encode($category->name), ['/home', 'id' => $category->id], ['class' => 'link-body-emphasis text-decoration-none']) ?>
+                        <?= Html::a(Html::encode($category->name), ['/home', 'id' => $category->id], ['class' => 'link-body-emphasis text-decoration-none fa fa-leaf' ]) ?>
                     </li>
                 <?php endforeach; ?>
                 <li class="list-group-item">
@@ -128,3 +133,4 @@ use yii\helpers\StringHelper;
         </div>
     </div>
 </section>
+</div>
