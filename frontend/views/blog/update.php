@@ -2,8 +2,8 @@
 use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\Url;
-use common\widgets\froala\FroalaEditorWidget;
+use yii\helpers\ArrayHelper;
+
 AppAsset::register($this);
 ?>
 <div class="form-wrapper">
@@ -33,7 +33,10 @@ AppAsset::register($this);
                 </div>
 
                 <div class='col'>
-                    <?= $form->field($model, 'category_id')->dropdownList($categorys)->label('دسته بندی مقاله')?>
+                <?= $form->field($model, 'category_id')->dropdownList(
+                    ArrayHelper::map($categorys, 'id', 'title'), // فرض بر اینکه فیلد title، عنوان دسته‌بندی باشه
+                    ['prompt' => 'انتخاب دسته‌بندی']
+                )->label('دسته بندی مقاله') ?>                
                 </div>
             </div>
             <div class='row'>

@@ -22,6 +22,7 @@ class CreateController extends Controller
         $categorys = Category::find()->asArray()->orderBy(['created_at' => SORT_DESC])->all();
         $categorys = array_column($categorys, 'name', 'id');
         if (!Yii::$app->user->isGuest){
+            $model->writer = Yii::$app->user->identity->name;
             if ($model->load(Yii::$app->request->post())) {
                 $uploadedFile = UploadedFile::getInstance($model, 'image');
         
@@ -101,5 +102,6 @@ class CreateController extends Controller
             // در صورت خطا
             return ['error' => 'آپلود تصویر失敗 شد.'];
         }
+
     
  }  

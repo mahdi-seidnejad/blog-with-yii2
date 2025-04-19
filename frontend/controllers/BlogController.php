@@ -6,6 +6,7 @@ use frontend\models\Post;
 use frontend\models\Category;
 use frontend\models\Comments;
 use frontend\models\Subscriber;
+use frontend\models\User;
 class BlogController extends Controller
 {
     public $layout = 'blog'; 
@@ -54,6 +55,23 @@ class BlogController extends Controller
         $count = Post::find()->where(['like','title',$kw])->count();
         return $this->render('search', ['posts' => $posts , 'categorys' => $categorys ,"kw"=>$kw, 'count'=>$count]);
     }
+    public function actionMyPost(){
+        $writer = Yii::$app->user->identity->name;
+        $post = Post::find()->where(['writer' => $writer])->all();
+        return $this->render('my-post', ['posts'=>$post]);
+    }
+    public function actionUpdate($id){
+
+        $model = Post::find()->where(['id' => $id])->one();
+        $categorys = Category::find()->orderBy(['created_at' => SORT_DESC])->all();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'پست با موفقیت بروزرسانی شد.');
+            return $this->redirect(['/blog/blog']);
+        }
+        return $this->render('update', ['model' => $model,
+        'categorys'=>$categorys] );
+    }
+    
 
     
 }

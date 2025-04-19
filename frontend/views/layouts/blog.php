@@ -32,7 +32,7 @@ AppAsset::register($this);
             >
                 <div class="container py-3 align-items-center d-flex flex-column flex-md-row ">
 
-                    <?= Html::a('Sn.io', ['/home'], ['class' => 'fs-4 fw-medium link-body-emphasis text-decoration-none']) ?>
+                    <?= Html::a('وبلاگ حسابرو', ['/home'], ['class' => 'fs-4 fw-bold link-body-emphasis text-decoration-none']) ?>
                     <?= Html::a('صفحه اصلی', ['/home'], ['class' => 'fw-bold me-3 py-2 link-body-emphasis text-decoration-none']) ?>
                     <?= Html::a('افزودن پست', ['create/post'], ['class' => 'me-3 py-2 link-body-emphasis text-decoration-none']) ?>
 
@@ -54,20 +54,24 @@ AppAsset::register($this);
                 'data-method' => 'post',
                 'class' => 'dropdown-item'
             ]) ?></li>
+                        <li><?= Html::a('ویرایش', ['/auth/update'], [
+                'data-method' => 'post',
+                'class' => 'dropdown-item'
+            ]) ?></li>
+                <li><?= Html::a('پست های من', ['/blog/my-post'], [
+                'data-method' => 'post',
+                'class' => 'dropdown-item'
+            ]) ?></li>
         </ul>
     </div>
 <?php else: ?>
-    <div class="row">
-        <div class="auth col w-100">
+    <div class="row gap-2">
             <?= Html::a('ثبت نام', ['/auth/signup'], [
-                'class' => 'btn btn-secondary btn-sm fs-6 w-100'
+                'class' => 'btn btn-secondary fs-6  col text-nowrap'
             ]) ?>
-        </div>
-        <div class="auth col w-100">
             <?= Html::a('ورود', ['/auth/login-form'], [
-                'class' => 'btn btn-secondary fs-6 w-100'
+                'class' => 'btn btn-secondary fs-6  col'
             ]) ?>
-        </div>
     </div>
 <?php endif ?>
                     </nav>

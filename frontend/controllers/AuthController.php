@@ -57,4 +57,13 @@ class AuthController extends Controller
         Yii::$app->user->logout();
         return $this->redirect(['/blog/blog']);
     }
+    public function actionUpdate(){
+        $model = User::findOne(Yii::$app->user->identity->id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'اطلاعات کاربر با موفقیت بروزرسانی شد.');
+            return $this->redirect(['/blog/blog']);
+        }
+        return $this->render('update',['model'=>$model]);
+    }
 }

@@ -57,11 +57,16 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <?php if (Yii::$app->user->identity->name==Html::encode($post->writer)): ?>
+                                <div>
+                                        <?=Html::a("ویرایش",Url::to(['update', 'id' => Html::encode($post->id)]),['class'=>' mt-3 btn btn-secondary link-body-emphasis text-decoration-none text-color-white'])?>
+                                </div>
+                                <?php endif ?>
                                 <hr class="mt-4" />
                                 <!-- Comment Section -->
                                 <div class="col">
                                     <!-- Comment Form -->
+
                                     <div class="card">
                                         <div class="card-body">
                                             <p class="fw-bold fs-5 mb-2">
@@ -91,6 +96,7 @@
 
                                         </div>
                                     </div>
+
 
                                     <!-- comments -->
                                     <?php Pjax::begin(['id' => 'pjax-comments', 'timeout' => 5000]); ?>
